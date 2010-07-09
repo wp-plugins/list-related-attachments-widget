@@ -10,7 +10,7 @@ List Related Attachments is a sidebar widget that will display a list of filtere
 
 == Description ==
 
-List Related Attachments is a sidebar widget that will display a filtered list of all related attachments related to the current post or page. The widget options are: title, number of attachments to display and type of attachment to display by mime/type.
+List Related Attachments is a sidebar widget that will display a filtered list of all related attachments linked to current post or page. The widget options are: title, number of attachments to display and type of attachment to display by mime/type.
 
 == Installation ==
 
@@ -30,7 +30,7 @@ List Related Attachments is a sidebar widget that will display a filtered list o
 
 == Screenshots ==
 
-1. This screen shot shows the available options of the `List Related Attachments` including widget title, count and type of attachments to display.
+1. Screen shot screenshot-1.png shows the available options of the `List Related Attachments` including widget title, count and type of attachments to display.
 
 == Changelog ==
 
