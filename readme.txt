@@ -4,13 +4,13 @@ Donate link: http://www.twinpictures.de/related-attachments/
 Tags: widget, list, related, attachments, sidebar, uploaded, files, shortcode
 Requires at least: 2.0.2
 Tested up to: 3.0.1
-Stable tag: 1.3
+Stable tag: 1.4
 
 List Related Attachments is a sidebar widget that will display a list of filtered attachments related to the current post.
 
 == Description ==
 
-List Related Attachments is a sidebar widget (and as of 1.2 shortcode function) that will display a filtered list of all related attachments linked to current post or page. The widget options are: title, number of attachments to display and type of attachment to display by mime/type. The shortcode is options are "title" and "count" and is placed inside of a post or page like so: `[list-related-attach type="application/zip" count="3" orderby="menu_order ID" order="ASC"]`.
+List Related Attachments is a sidebar widget (and as of 1.2 shortcode function) that will display a filtered list of all related attachments linked to current post or page. The widget options are: title, number of attachments to display and type of attachment to display by mime/type. The shortcode is options are "title" and "count" and is placed inside of a post or page like so: `[list-related-attach type="application/zip" count="3" orderby="menu_order ID" order="ASC" show="caption"]`.
 
 == Installation ==
 
@@ -35,6 +35,7 @@ List Related Attachments is a sidebar widget (and as of 1.2 shortcode function) 
 1. count = "-1" (so everything)
 1. orderby = "date" (by the date the attachment was added)
 1. order = "DESC" (Descending in the newest to oldest direction)
+1. show = "title" (The title of the attachment)
 
 = I am going to a respectable cocktail bar, can you recommend a drink I should try? =
 
@@ -45,6 +46,9 @@ Gin Basel Smash
 1. Screen shot screenshot-1.png shows the available options of the `List Related Attachments` including widget title, count and type of attachments to display.
 
 == Changelog ==
+
+= 1.4 =
+* Options now allow to choose from the attachment title, caption or description as the text that is displayed in the attachment link.
 
 = 1.3 =
 * Expanded the options to include orderby and order... for *Ultimater Flexibility* -- yes, Ultimater is not a real word, but just go with it, OK?
@@ -61,6 +65,9 @@ Gin Basel Smash
 * The plugin came to be.
 
 == Upgrade Notice ==
+
+= 1.4 =
+Expands the plugin to include display options in the attachment link text.
 
 = 1.3 =
 Expands the plugin to include orderby and order options.
