@@ -3,7 +3,7 @@
 	Plugin Name: List Related Attachments Widget
 	Plugin URI: http://twinpictures.de
 	Description: Display a list of related attachments linked to the current post or page
-	Version: 1.2
+	Version: 1.3
 	Author: Twinpictures
 	Author URI: http://www.twinpictures.de/related-attachments/
 */
