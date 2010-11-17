@@ -26,7 +26,9 @@ function widget_listattach_init() {
 		return array(
 			'title' => "Attachments",
 			'count' => -1,
-			'type' => "application"
+			'type' => "application",
+                                                'orderby' => "date",
+                                                'order' => "DESC"
 		);
 	}
 
@@ -40,6 +42,8 @@ function widget_listattach_init() {
 			'post_type' => 'attachment',
 			'post_mime_type' => $options['type'],
 			'numberposts' => $options['count'],
+                                                'order_by' => $options['orderby'],
+                                                'order' => $options['order'],
 			'post_parent' => $post->ID
 		); 
 		$attachments = get_posts($args);
@@ -87,7 +91,16 @@ function widget_listattach_init() {
 		// type option
 		echo '<p style="text-align:left"><label for="listattach-type">Attachment Mime/Type: <input style="width: 200px;" id="listattach-type" name="listattach-type" type="text" value="'.$options['type'].'" /></label><br/>';
 		echo '<a href="http://en.wikipedia.org/wiki/MIME_type#List_of_common_media_types" target="_blank">list of common mime/types</a></p>';
-		// Submit
+		
+                                // order option
+		echo '<p style="text-align:left"><label for="listattach-ordeby">Order By: <input style="width: 200px;" id="listattach-orderby" name="listattach-orderby" type="text" value="'.$options['orderby'].'" /></label><br/>';
+		echo 'Valid values: date, author, title, modified, menu_order, parent, ID and rand</p>';
+		
+                                // order direction option
+		echo '<p style="text-align:left"><label for="listattach-order">Order Direction: <input style="width: 200px;" id="listattach-order" name="listattach-order" type="text" value="'.$options['order'].'" /></label><br/>';
+		echo 'Valid values: ASC or DESC</p>';
+		
+                                // Submit
 		echo '<input type="hidden" id="listattach-submit" name="listattach-submit" value="1" />';
 	}
 	
@@ -103,12 +116,14 @@ function widget_listattach_init() {
 add_action('plugins_loaded', 'widget_listattach_init');
 
 //the short code
-function listattach($type = "application", $count = -1) {
+function listattach($type = "application", $count = -1, $orderby = "date", $order = "DESC" ) {
 	global $wpdb, $post;
 	$args = array(
 		'post_type' => 'attachment',
 		'post_mime_type' => $type,
 		'numberposts' => $count,
+                                'order_by' => $orderby,
+                                'order' => $order,
 		'post_parent' => $post->ID
 	); 
 	
