@@ -1,11 +1,26 @@
 <?php
 /*
 	Plugin Name: List Related Attachments Widget
-	Plugin URI: http://twinpictures.de
+	Plugin URI: http://www.twinpictures.de/related-attachments/
 	Description: Display a list of related attachments linked to the current post or page
-	Version: 1.3
+	Version: 1.5
 	Author: Twinpictures
-	Author URI: http://www.twinpictures.de/related-attachments/
+	Author URI: http://www.twinpictures.de/
+*/
+/*  Copyright 2010 Twinpictures (www.twinpictures.de)
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License, version 2, as 
+    published by the Free Software Foundation.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 //the widget
@@ -24,11 +39,12 @@ function widget_listattach_init() {
 	// Options and default values for this widget
 	function widget_listattach_options() {
 		return array(
-			'title' => "Attachments",
+			'title' => 'Attachments',
 			'count' => -1,
-			'type' => "application",
-                                                'orderby' => "date",
-                                                'order' => "DESC"
+			'type' => 'application',
+                                                'orderby' => 'date',
+                                                'order' => 'DESC',
+                                                'display' => 'title'
 		);
 	}
 
@@ -42,19 +58,30 @@ function widget_listattach_init() {
 			'post_type' => 'attachment',
 			'post_mime_type' => $options['type'],
 			'numberposts' => $options['count'],
-                                                'order_by' => $options['orderby'],
+                                                'orderby' => $options['orderby'],
                                                 'order' => $options['order'],
 			'post_parent' => $post->ID
 		); 
-		$attachments = get_posts($args);
+		$attachments = get_children($args);
 		if ($attachments) {
 			echo $before_widget . $before_title .$options['title'] . $after_title;
 			echo '<ul>';
 			foreach ($attachments as $attachment) {
 				//echo '<li>'.$attachment->post_title.'</li>';
 				//the_attachment_link($attachment->ID, false);
-				echo '<li>'.wp_get_attachment_link($attachment->ID).'</li>';
-				
+                                                                $descr = 'post_title'; 
+                                                                if($options['display'] == 'caption'){
+                                                                        $descr = 'post_excerpt';
+                                                                }
+                                                                else if($options['display'] == 'description'){
+                                                                        $descr = 'post_content';  
+                                                                }
+                                                                if($attachment->$descr){
+                                                                        echo '<li><a href="'.wp_get_attachment_url($attachment->ID).'">'.$attachment->$descr.'</a></li>';     
+                                                                }
+                                                                else{
+                                                                        echo '<li>'.wp_get_attachment_link($attachment->ID).'</li>';
+                                                                }
 			}
 			echo '</ul>'.$after_widget;
 		}
@@ -94,12 +121,25 @@ function widget_listattach_init() {
 		
                                 // order option
 		echo '<p style="text-align:left"><label for="listattach-ordeby">Order By: <input style="width: 200px;" id="listattach-orderby" name="listattach-orderby" type="text" value="'.$options['orderby'].'" /></label><br/>';
-		echo 'Valid values: date, author, title, modified, menu_order, parent, ID and rand</p>';
+                                echo '<a href="http://codex.wordpress.org/Function_Reference/query_posts#Orderby_Parameters" target="_blank">list of orderby values</a></p>';
 		
                                 // order direction option
 		echo '<p style="text-align:left"><label for="listattach-order">Order Direction: <input style="width: 200px;" id="listattach-order" name="listattach-order" type="text" value="'.$options['order'].'" /></label><br/>';
 		echo 'Valid values: ASC or DESC</p>';
-		
+                                
+                                // display option
+		echo '<p style="text-align:left">Display: ';
+                                echo '<select name="listattach-display" id="listattach-display">';
+                                $option_arr = array('title', 'caption', 'description');
+                                foreach($option_arr AS $opt){
+                                        $selected = '';
+                                        if($options['display'] == $opt){
+                                                 $selected = 'SELECTED';
+                                        }
+                                        echo '<option value="'.$opt.'" '.$selected.'>'.$opt.'</option>';
+                                }
+                                echo '</select></p>';
+	
                                 // Submit
 		echo '<input type="hidden" id="listattach-submit" name="listattach-submit" value="1" />';
 	}
@@ -116,22 +156,43 @@ function widget_listattach_init() {
 add_action('plugins_loaded', 'widget_listattach_init');
 
 //the short code
-function listattach($type = "application", $count = -1, $orderby = "date", $order = "DESC" ) {
+function listattach($atts) {
 	global $wpdb, $post;
+                
+                extract(shortcode_atts(array(
+		'type' => 'application',
+		'count' => -1,
+                                'orderby' => 'date',
+                                'order' => 'DESC',
+                                'show' => 'post_title',
+	), $atts));
+                
 	$args = array(
 		'post_type' => 'attachment',
 		'post_mime_type' => $type,
 		'numberposts' => $count,
-                                'order_by' => $orderby,
+                                'orderby' => $orderby,
                                 'order' => $order,
 		'post_parent' => $post->ID
 	); 
 	
-	$attachments = get_posts($args);
+	$attachments = get_children($args);
 	if ($attachments) {
-		$lra = '<ul class = "list-related-attach">';
+		$lra = '<ul class = "list-related-attach '.$show.'">';
 		foreach ($attachments as $attachment) {
-			$lra .= '<li>'.wp_get_attachment_link($attachment->ID).'</li>';
+                                                $descr = 'post_title';
+                                                if($show == 'caption'){
+                                                        $descr = 'post_excerpt';
+                                                }
+                                                else if($show == 'description'){
+                                                        $descr = 'post_content';  
+                                                }
+                                                if($attachment->$descr){
+                                                        $lra .= '<li><a href="'.wp_get_attachment_url($attachment->ID).'">'.$attachment->$descr.'</a></li>';     
+                                                }
+                                                else{
+                                                        $lra .= '<li>'.wp_get_attachment_link($attachment->ID).'</li>';
+                                                }
 		}
 		$lra .= '</ul>';
 	}
