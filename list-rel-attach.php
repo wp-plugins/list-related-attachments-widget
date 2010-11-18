@@ -1,11 +1,26 @@
 <?php
 /*
 	Plugin Name: List Related Attachments Widget
-	Plugin URI: http://twinpictures.de
+	Plugin URI: http://www.twinpictures.de/related-attachments/
 	Description: Display a list of related attachments linked to the current post or page
-	Version: 1.4
+	Version: 1.5
 	Author: Twinpictures
-	Author URI: http://www.twinpictures.de/related-attachments/
+	Author URI: http://www.twinpictures.de/
+*/
+/*  Copyright 2010 Twinpictures (www.twinpictures.de)
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License, version 2, as 
+    published by the Free Software Foundation.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 //the widget
@@ -141,8 +156,17 @@ function widget_listattach_init() {
 add_action('plugins_loaded', 'widget_listattach_init');
 
 //the short code
-function listattach($type = "application", $count = -1, $orderby = "date", $order = "DESC", $show = "post_title" ) {
+function listattach($atts) {
 	global $wpdb, $post;
+                
+                extract(shortcode_atts(array(
+		'type' => 'application',
+		'count' => -1,
+                                'orderby' => 'date',
+                                'order' => 'DESC',
+                                'show' => 'post_title',
+	), $atts));
+                
 	$args = array(
 		'post_type' => 'attachment',
 		'post_mime_type' => $type,
@@ -154,9 +178,8 @@ function listattach($type = "application", $count = -1, $orderby = "date", $orde
 	
 	$attachments = get_children($args);
 	if ($attachments) {
-		$lra = '<ul class = "list-related-attach">';
+		$lra = '<ul class = "list-related-attach '.$show.'">';
 		foreach ($attachments as $attachment) {
-			//$lra .= '<li>'.wp_get_attachment_link($attachment->ID).'</li>';
                                                 $descr = 'post_title';
                                                 if($show == 'caption'){
                                                         $descr = 'post_excerpt';

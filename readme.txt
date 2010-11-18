@@ -1,16 +1,16 @@
-=== Plugin Name ===
+=== List Related Attachments ===
 Contributors: Twinpictures
 Donate link: http://www.twinpictures.de/related-attachments/
 Tags: widget, list, related, attachments, sidebar, uploaded, files, shortcode
 Requires at least: 2.0.2
 Tested up to: 3.0.1
-Stable tag: 1.4
+Stable tag: 1.5
 
 List Related Attachments is a sidebar widget that will display a list of filtered attachments related to the current post.
 
 == Description ==
 
-List Related Attachments is a sidebar widget (and as of 1.2 shortcode function) that will display a filtered list of all related attachments linked to current post or page. The widget options are: title, number of attachments to display and type of attachment to display by mime/type. The shortcode is options are "title" and "count" and is placed inside of a post or page like so: `[list-related-attach type="application/zip" count="3" orderby="menu_order ID" order="ASC" show="caption"]`.
+List Related Attachments is a sidebar widget and shortcode that will display a filtered, sorted and ordered list of all related attachments linked to current post or page. The widget options are: title, number of attachments to display, type of attachment to display by mime/type, order by value, order direction and what should be displayed (attachment title, caption or description). The shortcode is options are the same and ae placed inside of a post or page like so: `[list-related-attach type="application/zip" count="3" orderby="menu_order ID" order="ASC" show="caption"]`.
 
 == Installation ==
 
@@ -18,7 +18,7 @@ List Related Attachments is a sidebar widget (and as of 1.2 shortcode function) 
 1. Activate the Plugin
 1. Add the Widget to the desired sidebar in the WordPress Widgets menu.
 1. Configure the `Listed Related Attachments` widget options.
-1. Add a the shortcode to your post like so: `[list-related-attach type="application/zip" count="3"]`
+1. Add a the shortcode to your post like so: `[list-related-attach type="application/zip" count="3" orderby="menu_order ID" order="ASC" show="caption"]`
 1. Test that the this plugin meets your demanding needs.
 1. Rate the plugin and verify that it works at wordpress.org.
 1. Leave a comment regarding bugs, feature request, cocktail recipes at www.twinpictures.de/related-attachments/
@@ -43,9 +43,13 @@ Gin Basel Smash
 
 == Screenshots ==
 
-1. Screen shot screenshot-1.png shows the available options of the `List Related Attachments` including widget title, count and type of attachments to display.
+1. screenshot-1.png shows the available options of the `List Related Attachments`.  See any more you like?  Let us know!
+1. screenshot-2.png shows sidebar widget in some hot-hot sidebar widget action.  Calm down now... it's not THAT exciting.
 
 == Changelog ==
+
+= 1.5 =
+* Fixed a bug in the shortcode (Big thanks to motylanogha for reporting this).  NOW the plugin works 100% like it should... I think.
 
 = 1.4 =
 * Options now allow to choose from the attachment title, caption or description as the text that is displayed in the attachment link.
@@ -65,6 +69,9 @@ Gin Basel Smash
 * The plugin came to be.
 
 == Upgrade Notice ==
+
+= 1.5 =
+Fixes a bug in the shortcode discovered by motylanogha.  Plugin is now 100% working again.
 
 = 1.4 =
 Expands the plugin to include display options in the attachment link text.
