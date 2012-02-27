@@ -2,12 +2,14 @@
 /*
 	Plugin Name: List Related Attachments Widget
 	Plugin URI: http://www.twinpictures.de/related-attachments/
-	Description: Display a list of related attachments linked to the current post or page
-	Version: 1.5
+	Description: Display a filtered list of related attachments linked to the current post or page
+	Version: 1.6
 	Author: Twinpictures
 	Author URI: http://www.twinpictures.de/
+	License: GPL2
 */
-/*  Copyright 2010 Twinpictures (www.twinpictures.de)
+
+/*  Copyright 2012 Twinpictures (www.twinpictures.de)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as 
@@ -42,9 +44,9 @@ function widget_listattach_init() {
 			'title' => 'Attachments',
 			'count' => -1,
 			'type' => 'application',
-                                                'orderby' => 'date',
-                                                'order' => 'DESC',
-                                                'display' => 'title'
+			'orderby' => 'date',
+			'order' => 'DESC',
+			'display' => 'title'
 		);
 	}
 
@@ -54,34 +56,37 @@ function widget_listattach_init() {
 		extract($args);
 		$options = array_merge(widget_listattach_options(), get_option('widget_listattach'));
 		unset($options[0]); //returned by get_option(), but we don't need it
+
 		$args = array(
 			'post_type' => 'attachment',
 			'post_mime_type' => $options['type'],
 			'numberposts' => $options['count'],
-                                                'orderby' => $options['orderby'],
-                                                'order' => $options['order'],
+			'orderby' => $options['orderby'],
+			'order' => $options['order'],
 			'post_parent' => $post->ID
-		); 
+		);
+		
 		$attachments = get_children($args);
 		if ($attachments) {
-			echo $before_widget . $before_title .$options['title'] . $after_title;
+			
+			echo $before_widget . $before_title . $options['title'] . $after_title;
 			echo '<ul>';
 			foreach ($attachments as $attachment) {
-				//echo '<li>'.$attachment->post_title.'</li>';
-				//the_attachment_link($attachment->ID, false);
-                                                                $descr = 'post_title'; 
-                                                                if($options['display'] == 'caption'){
-                                                                        $descr = 'post_excerpt';
-                                                                }
-                                                                else if($options['display'] == 'description'){
-                                                                        $descr = 'post_content';  
-                                                                }
-                                                                if($attachment->$descr){
-                                                                        echo '<li><a href="'.wp_get_attachment_url($attachment->ID).'">'.$attachment->$descr.'</a></li>';     
-                                                                }
-                                                                else{
-                                                                        echo '<li>'.wp_get_attachment_link($attachment->ID).'</li>';
-                                                                }
+				$mime_parts = explode("/", $attachment-> post_mime_type);
+				$mime_class = 'class="mime-'.$mime_parts[count($mime_parts)-1].'"';
+				$descr = 'post_title'; 
+				if($options['display'] == 'caption'){
+					$descr = 'post_excerpt';
+				}
+				else if($options['display'] == 'description'){
+					$descr = 'post_content';  
+				}
+				if($attachment->$descr){
+					echo '<li '.$mime_class.'><a href="'.wp_get_attachment_url($attachment->ID).'">'.$attachment->$descr.'</a></li>';     
+				}
+				else{
+					echo '<li '.$mime_class.'>'.wp_get_attachment_link($attachment->ID).'</li>';
+				}
 			}
 			echo '</ul>'.$after_widget;
 		}
@@ -119,28 +124,37 @@ function widget_listattach_init() {
 		echo '<p style="text-align:left"><label for="listattach-type">Attachment Mime/Type: <input style="width: 200px;" id="listattach-type" name="listattach-type" type="text" value="'.$options['type'].'" /></label><br/>';
 		echo '<a href="http://en.wikipedia.org/wiki/MIME_type#List_of_common_media_types" target="_blank">list of common mime/types</a></p>';
 		
-                                // order option
+        // order option
 		echo '<p style="text-align:left"><label for="listattach-ordeby">Order By: <input style="width: 200px;" id="listattach-orderby" name="listattach-orderby" type="text" value="'.$options['orderby'].'" /></label><br/>';
-                                echo '<a href="http://codex.wordpress.org/Function_Reference/query_posts#Orderby_Parameters" target="_blank">list of orderby values</a></p>';
+        echo '<a href="http://codex.wordpress.org/Function_Reference/query_posts#Orderby_Parameters" target="_blank">list of orderby values</a></p>';
 		
-                                // order direction option
+        // order direction option
 		echo '<p style="text-align:left"><label for="listattach-order">Order Direction: <input style="width: 200px;" id="listattach-order" name="listattach-order" type="text" value="'.$options['order'].'" /></label><br/>';
 		echo 'Valid values: ASC or DESC</p>';
                                 
-                                // display option
+        // display option
 		echo '<p style="text-align:left">Display: ';
-                                echo '<select name="listattach-display" id="listattach-display">';
-                                $option_arr = array('title', 'caption', 'description');
-                                foreach($option_arr AS $opt){
-                                        $selected = '';
-                                        if($options['display'] == $opt){
-                                                 $selected = 'SELECTED';
-                                        }
-                                        echo '<option value="'.$opt.'" '.$selected.'>'.$opt.'</option>';
-                                }
-                                echo '</select></p>';
-	
-                                // Submit
+		echo '<select name="listattach-display" id="listattach-display">';
+		$option_arr = array('title', 'caption', 'description');
+		foreach($option_arr AS $opt){
+			$selected = '';
+			if($options['display'] == $opt){
+				$selected = 'SELECTED';
+			}
+			echo '<option value="'.$opt.'" '.$selected.'>'.$opt.'</option>';
+		}
+		echo '</select></p>';
+		
+		// scope
+		/*
+		$checked = '';
+		if($options['scope'] == 'post'){
+			$checked = 'CHECKED';
+		}
+		echo '<p style="text-align:left"><input type="checkbox" id="listattach-scope" name="listattach-scope" value="'.$options['scope'].'" '.$checked.'/> <label for="listattach-scope">Limit Scope To Current Post</label></p>';
+		*/
+		
+		// Submit
 		echo '<input type="hidden" id="listattach-submit" name="listattach-submit" value="1" />';
 	}
 	
@@ -159,41 +173,46 @@ add_action('plugins_loaded', 'widget_listattach_init');
 function listattach($atts) {
 	global $wpdb, $post;
                 
-                extract(shortcode_atts(array(
+    extract(shortcode_atts(array(
 		'type' => 'application',
 		'count' => -1,
-                                'orderby' => 'date',
-                                'order' => 'DESC',
-                                'show' => 'post_title',
+		'orderby' => 'date',
+		'order' => 'DESC',
+		'show' => 'post_title',
+		'scope' => 'post'
 	), $atts));
-                
+	
 	$args = array(
 		'post_type' => 'attachment',
 		'post_mime_type' => $type,
 		'numberposts' => $count,
-                                'orderby' => $orderby,
-                                'order' => $order,
+		'orderby' => $orderby,
+		'order' => $order,
 		'post_parent' => $post->ID
-	); 
+	);
 	
 	$attachments = get_children($args);
 	if ($attachments) {
 		$lra = '<ul class = "list-related-attach '.$show.'">';
 		foreach ($attachments as $attachment) {
-                                                $descr = 'post_title';
-                                                if($show == 'caption'){
-                                                        $descr = 'post_excerpt';
-                                                }
-                                                else if($show == 'description'){
-                                                        $descr = 'post_content';  
-                                                }
-                                                if($attachment->$descr){
-                                                        $lra .= '<li><a href="'.wp_get_attachment_url($attachment->ID).'">'.$attachment->$descr.'</a></li>';     
-                                                }
-                                                else{
-                                                        $lra .= '<li>'.wp_get_attachment_link($attachment->ID).'</li>';
-                                                }
+			//let's add swill's sexy mime type class, shall we?
+			$mime_parts = explode("/", $attachment->post_mime_type);
+            $mime_class = 'class="mime-'.$mime_parts[count($mime_parts)-1].'"';
+			$descr = 'post_title';
+			if($show == 'caption'){
+				$descr = 'post_excerpt';
+			}
+			else if($show == 'description'){
+				$descr = 'post_content';  
+			}
+			if($attachment->$descr){
+				$lra .= '<li '.$mime_class.'><a href="'.wp_get_attachment_url($attachment->ID).'">'.$attachment->$descr.'</a></li>';     
+			}
+			else{
+				$lra .= '<li '.$mime_class.'>'.wp_get_attachment_link($attachment->ID).'</li>';
+			}
 		}
+		wp_reset_postdata();
 		$lra .= '</ul>';
 	}
 	return $lra;
