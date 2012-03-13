@@ -1,10 +1,10 @@
 <?php
 /*
-	Plugin Name: List Related Attachments Widget
-	Plugin URI: http://www.twinpictures.de/related-attachments/
-	Description: Display a filtered list of related attachments linked to the current post or page
-	Version: 1.6
-	Author: Twinpictures
+	Plugin Name: List Related Attachments
+	Plugin URI: hhttp://plugins.twinpictures.de/plugins/list-related-attachments/
+	Description: Display a filtered list of all related attachments linked to the current post or page
+	Version: 1.6.1
+	Author: twinpictures
 	Author URI: http://www.twinpictures.de/
 	License: GPL2
 */

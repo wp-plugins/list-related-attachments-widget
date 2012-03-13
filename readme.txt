@@ -1,16 +1,16 @@
 === List Related Attachments ===
-Contributors: Twinpictures
-Donate link: http://www.twinpictures.de/related-attachments/
-Tags: widget, list, related, attachments, sidebar, uploaded, files, shortcode
+Contributors: twinpictures, baden03
+Donate link: http://plugins.twinpictures.de/plugins/list-related-attachments/
+Tags: widget, list, related, attachments, sidebar, uploaded, files, shortcode, twinpictures, plugin-oven, plugin oven
 Requires at least: 2.8
 Tested up to: 3.3.1
-Stable tag: 1.6
+Stable tag: 1.6.1
 
-Listed Related Attachments is a small wordpress widget and shortcode that will display a filterd list of all related attachments for the current post or page.
+Listed Related Attachments will display a filtered list of all related attachments for the current post or page.
 
 == Description ==
 
-List Related Attachments is a sidebar widget and shortcode that will display a filtered, sorted and ordered list of all related attachments linked to current post or page. The widget options are: title, number of attachments to display, type of attachment to display by mime/type, order by value, order direction and what should be displayed (attachment title, caption or description).  Visit [Twinpictures | List-Related-Attachments](http://www.twinpictures.de/related-attachments/ "List-Related-Attachments WordPress plugin oven at Twinpictures") for a complete listing of shortcode options and examples that delight and inform.
+List Related Attachments is a sidebar widget and shortcode that will display a filtered, sorted and ordered list of all related attachments linked to current post or page. The widget options are: title, number of attachments to display, type of attachment to display by mime/type, order by value, order direction and what should be displayed (attachment title, caption or description).  A <a href='http://plugins.twinpictures.de/plugins/list-related-attachments/documentation/'>complete listing of shortcode options and attribute demos</a> are available that delight and inform. What's more, there is <a href='http://wordpress.org/tags/list-related-attachments-widget'>excellent and free community</a> as well as <a href='http://plugins.twinpictures.de/plugins/list-related-attachments/support/'>premium support</a> available.
 
 == Installation ==
 
@@ -18,10 +18,10 @@ List Related Attachments is a sidebar widget and shortcode that will display a f
 1. Activate the Plugin
 1. Add the Widget to the desired sidebar in the WordPress Widgets menu.
 1. Configure the `Listed Related Attachments` widget options.
-1. Add a the shortcode to your post like so: `[list-related-attach type="application/zip" count="3" orderby="menu_order ID" order="ASC" show="caption"]`
+1. Add a the shortcode to your post like so: `[list-related-attach type="application/zip" count="3" orderby="title" order="ASC" show="caption"]`
 1. Test that the this plugin meets your demanding needs.
 1. Rate the plugin and verify that it works at wordpress.org.
-1. Leave a comment regarding bugs, feature request, cocktail recipes at [Twinpictures | List-Related-Attachments]
+1. Leave a comment regarding bugs, feature request, cocktail recipes at: http://wordpress.org/tags/list-related-attachments-widget
 
 == Frequently Asked Questions ==
 
@@ -32,19 +32,17 @@ List Related Attachments is a sidebar widget and shortcode that will display a f
 1. order = "DESC" (Descending in the newest to oldest direction)
 1. show = "title" (The title of the attachment)
 
-= I am going to a respectable cocktail bar, can you recommend a drink I should try? =
+= I am going to a respectable cocktail bar, can you recommend a drink? =
 Gin Basel Smash
 
 = I am a Social Netwookiee, do you have a Facebook page? =
-Yes, yes...[Twinpictures is on Facebook](http://www.facebook.com/twinpictures "Twinpictures on Facebook").
-[Twinpictures is on Facebook]: http://www.facebook.com/twinpictures
+Yes, yes... <a href='http://www.facebook.com/twinpictures'>Twinpictures is on Facebook</a>.
 
 = Does Twinpictures do the Twitter? =
-Ah yes! [@twinpictures](http://twitter.com/#!/twinpictures "Twinpictures Twitter Channel") does the twitter tweeting around here.
-[@twinpictures]: http://twitter.com/#!/twinpictures
+Ah yes! <a href='http://twitter.com/#!/twinpictures'>@Twinpictures</a> does the twitter tweeting around here.
 
 = Where can I go for jokes and fun? =
-Why not try: [Jokes & Fun]: http://jokesandfun.de/
+Why not try: <a href='http://jokesandfun.de/'>Jokes & Fun</a>
 
 = What is the meaning of life, the universe and everything? =
 42
@@ -53,8 +51,11 @@ Why not try: [Jokes & Fun]: http://jokesandfun.de/
 
 1. Shown here are the available options of the `List Related Attachments`.  See any more you like?  Let us know!
 1. For your viewing pleasure:  The sidebar widget in the midst of some hot-hot sidebar widget action.  Calm down now... it's not THAT exciting.
-
+1. Hide your kids, hide your husband, this is how the shortcode works.
 == Changelog ==
+
+= 1.6.1 =
+* Vastly enhanced documentation and moved the plugin over to the plugin oven.
 
 = 1.6 =
 * Optimized code and added mime-type classes to list items.
@@ -80,6 +81,9 @@ Why not try: [Jokes & Fun]: http://jokesandfun.de/
 * The plugin came to be.
 
 == Upgrade Notice ==
+
+= 1.6.1 =
+* Improved documentation and a new home at The Plugin Oven.
 
 = 1.6 =
 Added new mime-type specific classes to the list items.
