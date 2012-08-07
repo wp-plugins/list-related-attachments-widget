@@ -3,14 +3,14 @@ Contributors: twinpictures, baden03
 Donate link: http://plugins.twinpictures.de/plugins/list-related-attachments/
 Tags: widget, list, related, attachments, sidebar, uploaded, files, shortcode, twinpictures, plugin-oven, plugin oven
 Requires at least: 2.8
-Tested up to: 3.3.1
-Stable tag: 1.6.1
+Tested up to: 3.4.1
+Stable tag: 1.7
 
 Listed Related Attachments will display a filtered list of all related attachments for the current post or page.
 
 == Description ==
 
-List Related Attachments is a sidebar widget and shortcode that will display a filtered, sorted and ordered list of all related attachments linked to current post or page. The widget options are: title, number of attachments to display, type of attachment to display by mime/type, order by value, order direction and what should be displayed (attachment title, caption or description).  A <a href='http://plugins.twinpictures.de/plugins/list-related-attachments/documentation/'>complete listing of shortcode options and attribute demos</a> are available that delight and inform. What's more, there is <a href='http://wordpress.org/tags/list-related-attachments-widget'>excellent and free community</a> as well as <a href='http://plugins.twinpictures.de/plugins/list-related-attachments/support/'>premium support</a> available.
+List Related Attachments is a sidebar widget and shortcode that will display a filtered, sorted and ordered list of all related attachments linked to current post or page. The widget options are: title, number of attachments to display, type of attachment to display by mime/type, order by value, order direction and what should be displayed (attachment title, caption or description).  A <a href='http://plugins.twinpictures.de/plugins/list-related-attachments/documentation/'>complete listing of shortcode options and attribute demos</a> are available that delight and inform. What's more, there is <a href='http://wordpress.org/support/plugin/list-related-attachments-widget'>excellent and free community</a> as well as <a href='http://plugins.twinpictures.de/plugins/list-related-attachments/support/'>premium support</a> available.
 
 == Installation ==
 
@@ -54,6 +54,11 @@ Why not try: <a href='http://jokesandfun.de/'>Jokes & Fun</a>
 1. Hide your kids, hide your husband, this is how the shortcode works.
 == Changelog ==
 
+= 1.7 =
+* Added the ability to chose a target for the attachment (for example a new tab)
+* Expanded the display/show attribute to list multiple attributes such as title - caption or title (description)
+* A big Thank You to oldbrit (http://wordpress.org/support/profile/oldbrit) suggesting these ideas! (http://wordpress.org/support/topic/plugin-list-related-attachments-title-caption-or-description)
+
 = 1.6.1 =
 * Vastly enhanced documentation and moved the plugin over to the plugin oven.
 
@@ -81,6 +86,9 @@ Why not try: <a href='http://jokesandfun.de/'>Jokes & Fun</a>
 * The plugin came to be.
 
 == Upgrade Notice ==
+
+= 1.7 =
+* Added target for links, as well as the ability to show more than one attachment attribute in the link.
 
 = 1.6.1 =
 * Improved documentation and a new home at The Plugin Oven.

@@ -1,10 +1,10 @@
 <?php
 /*
 	Plugin Name: List Related Attachments
-	Plugin URI: hhttp://plugins.twinpictures.de/plugins/list-related-attachments/
+	Plugin URI: http://plugins.twinpictures.de/plugins/list-related-attachments/
 	Description: Display a filtered list of all related attachments linked to the current post or page
-	Version: 1.6.1
-	Author: twinpictures
+	Version: 1.7
+	Author: Twinpictures
 	Author URI: http://www.twinpictures.de/
 	License: GPL2
 */
@@ -46,7 +46,8 @@ function widget_listattach_init() {
 			'type' => 'application',
 			'orderby' => 'date',
 			'order' => 'DESC',
-			'display' => 'title'
+			'display' => 'title',
+			'target' => 'self'
 		);
 	}
 
@@ -68,29 +69,25 @@ function widget_listattach_init() {
 		
 		$attachments = get_children($args);
 		if ($attachments) {
-			
 			echo $before_widget . $before_title . $options['title'] . $after_title;
 			echo '<ul>';
+			$link_target = '';
+			if($options['target'] != 'self'){
+				$link_target = 'target="_blank"';
+			}
 			foreach ($attachments as $attachment) {
 				$mime_parts = explode("/", $attachment-> post_mime_type);
 				$mime_class = 'class="mime-'.$mime_parts[count($mime_parts)-1].'"';
-				$descr = 'post_title'; 
-				if($options['display'] == 'caption'){
-					$descr = 'post_excerpt';
-				}
-				else if($options['display'] == 'description'){
-					$descr = 'post_content';  
-				}
-				if($attachment->$descr){
-					echo '<li '.$mime_class.'><a href="'.wp_get_attachment_url($attachment->ID).'">'.$attachment->$descr.'</a></li>';     
-				}
-				else{
-					echo '<li '.$mime_class.'>'.wp_get_attachment_link($attachment->ID).'</li>';
-				}
+				//replace title
+				$display_str = str_replace('title', $attachment->post_title, $options['display']);
+				//replace caption
+				$display_str = str_replace('caption', $attachment->post_excerpt, $display_str);
+				//replace description
+				$display_str = str_replace('description', $attachment->post_content, $display_str);
+				echo '<li '.$mime_class.'><a href="'.wp_get_attachment_url($attachment->ID).'" '.$link_target.'>'.$display_str.'</a></li>';     
 			}
 			echo '</ul>'.$after_widget;
-		}
-		
+		}	
 	}
 
 	// This is the function that outputs the form to let the users edit
@@ -133,26 +130,21 @@ function widget_listattach_init() {
 		echo 'Valid values: ASC or DESC</p>';
                                 
         // display option
-		echo '<p style="text-align:left">Display: ';
-		echo '<select name="listattach-display" id="listattach-display">';
-		$option_arr = array('title', 'caption', 'description');
+		echo '<p style="text-align:left"><label for="listattach-display">Display: <input style="width: 200px;" id="listattach-display" name="listattach-display" type="text" value="'.$options['display'].'" /></label><br/>';
+		echo 'title, caption and/or descripton</p>';
+		
+		// target option
+		echo '<p style="text-align:left">Target: ';
+		echo '<select name="listattach-target" id="listattach-target">';
+		$option_arr = array('self', 'blank');
 		foreach($option_arr AS $opt){
 			$selected = '';
-			if($options['display'] == $opt){
+			if($options['target'] == $opt){
 				$selected = 'SELECTED';
 			}
 			echo '<option value="'.$opt.'" '.$selected.'>'.$opt.'</option>';
 		}
 		echo '</select></p>';
-		
-		// scope
-		/*
-		$checked = '';
-		if($options['scope'] == 'post'){
-			$checked = 'CHECKED';
-		}
-		echo '<p style="text-align:left"><input type="checkbox" id="listattach-scope" name="listattach-scope" value="'.$options['scope'].'" '.$checked.'/> <label for="listattach-scope">Limit Scope To Current Post</label></p>';
-		*/
 		
 		// Submit
 		echo '<input type="hidden" id="listattach-submit" name="listattach-submit" value="1" />';
@@ -178,8 +170,8 @@ function listattach($atts) {
 		'count' => -1,
 		'orderby' => 'date',
 		'order' => 'DESC',
-		'show' => 'post_title',
-		'scope' => 'post'
+		'show' => 'title',
+		'target' => 'self'
 	), $atts));
 	
 	$args = array(
@@ -194,23 +186,22 @@ function listattach($atts) {
 	$attachments = get_children($args);
 	if ($attachments) {
 		$lra = '<ul class = "list-related-attach '.$show.'">';
+		$link_target = '';
+		if($target != 'self'){
+			$link_target = 'target="_blank"';
+		}
 		foreach ($attachments as $attachment) {
 			//let's add swill's sexy mime type class, shall we?
 			$mime_parts = explode("/", $attachment->post_mime_type);
             $mime_class = 'class="mime-'.$mime_parts[count($mime_parts)-1].'"';
 			$descr = 'post_title';
-			if($show == 'caption'){
-				$descr = 'post_excerpt';
-			}
-			else if($show == 'description'){
-				$descr = 'post_content';  
-			}
-			if($attachment->$descr){
-				$lra .= '<li '.$mime_class.'><a href="'.wp_get_attachment_url($attachment->ID).'">'.$attachment->$descr.'</a></li>';     
-			}
-			else{
-				$lra .= '<li '.$mime_class.'>'.wp_get_attachment_link($attachment->ID).'</li>';
-			}
+			//replace title
+			$display_str = str_replace('title', $attachment->post_title, $show);
+			//replace caption
+			$display_str = str_replace('caption', $attachment->post_excerpt, $display_str);
+			//replace description
+			$display_str = str_replace('description', $attachment->post_content, $display_str);
+			$lra .= '<li '.$mime_class.'><a href="'.wp_get_attachment_url($attachment->ID).'" '.$link_target.'>'.$display_str.'</a></li>'; 
 		}
 		wp_reset_postdata();
 		$lra .= '</ul>';
