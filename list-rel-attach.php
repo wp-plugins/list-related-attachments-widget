@@ -3,7 +3,7 @@
 	Plugin Name: List Related Attachments
 	Plugin URI: http://plugins.twinpictures.de/plugins/list-related-attachments/
 	Description: Display a filtered list of all related attachments linked to the current post or page
-	Version: 1.8
+	Version: 1.9
 	Author: Twinpictures
 	Author URI: http://www.twinpictures.de/
 	License: GPL2
@@ -34,7 +34,7 @@ class listAttach extends WP_Widget {
 	
     /** Widget */
     function widget($args, $instance) {
-		global $wpdb, $post;
+		global $wp_query;
 		extract($args);
 		$title = empty($instance['title']) ? '' : apply_filters('widget_title', $instance['title']);
 		$count = empty($instance['count']) ? '-1' : apply_filters('widget_count', $instance['count']);
@@ -50,7 +50,7 @@ class listAttach extends WP_Widget {
 			'numberposts' => $count,
 			'orderby' => $orderby,
 			'order' => $order,
-			'post_parent' => $post->ID
+			'post_parent' => $wp_query->post->ID
 		);
 		
 		$attachments = get_children($args);
@@ -126,7 +126,7 @@ add_action('widgets_init', create_function('', 'return register_widget("listAtta
 
 //the short code
 function listattach($atts) {
-	global $wpdb, $post;
+	global $wp_query;
                 
     extract(shortcode_atts(array(
 		'type' => 'application',
@@ -143,7 +143,7 @@ function listattach($atts) {
 		'numberposts' => $count,
 		'orderby' => $orderby,
 		'order' => $order,
-		'post_parent' => $post->ID
+		'post_parent' => $wp_query->post->ID
 	);
 	
 	$attachments = get_children($args);

@@ -3,8 +3,8 @@ Contributors: twinpictures, baden03
 Donate link: http://plugins.twinpictures.de/plugins/list-related-attachments/
 Tags: widget, list, related, attachments, sidebar, uploaded, files, shortcode, twinpictures, plugin-oven, plugin oven
 Requires at least: 2.8
-Tested up to: 3.4.2
-Stable tag: 1.8
+Tested up to: 3.5
+Stable tag: 1.9
 
 Listed Related Attachments will display a filtered list of all related attachments for the current post or page.
 
@@ -54,6 +54,9 @@ Why not try: <a href='http://jokesandfun.de/'>Jokes & Fun</a>
 1. Hide your kids, hide your husband, this is how the shortcode works.
 == Changelog ==
 
+= 1.9 =
+* Only the attachments of the first post will be displayed when the sidebar widget is used on the blog page.
+
 = 1.8 =
 * Plugin now supports multi-language and multiple instances
 
@@ -89,6 +92,9 @@ Why not try: <a href='http://jokesandfun.de/'>Jokes & Fun</a>
 * The plugin came to be.
 
 == Upgrade Notice ==
+
+= 1.9 =
+* When sidebar widget is used on the Blog page, only attachments of the first post will be displayed.
 
 = 1.8 =
 * Plugin now supports language translation and multiple instance widgets
