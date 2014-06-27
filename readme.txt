@@ -2,15 +2,15 @@
 Contributors: twinpictures, baden03
 Donate link: http://plugins.twinpictures.de/plugins/list-related-attachments/
 Tags: widget, list, related, attachments, sidebar, uploaded, files, shortcode, twinpictures, plugin-oven, plugin oven
-Requires at least: 2.8
-Tested up to: 3.5
-Stable tag: 1.9
+Requires at least: 3.5
+Tested up to: 4.0
+Stable tag: 2.0
 
 Listed Related Attachments will display a filtered list of all related attachments for the current post or page.
 
 == Description ==
 
-List Related Attachments is a sidebar widget and shortcode that will display a filtered, sorted and ordered list of all related attachments linked to current post or page. The widget options are: title, number of attachments to display, type of attachment to display by mime/type, order by value, order direction and what should be displayed (attachment title, caption or description).  A <a href='http://plugins.twinpictures.de/plugins/list-related-attachments/documentation/'>complete listing of shortcode options and attribute demos</a> are available that delight and inform. What's more, there is <a href='http://wordpress.org/support/plugin/list-related-attachments-widget'>excellent and free community</a> as well as <a href='http://plugins.twinpictures.de/plugins/list-related-attachments/support/'>premium support</a> available.
+List Related Attachments is a sidebar widget and shortcode that will display a filtered, sorted and ordered list of all related attachments linked to current post or page. The widget options are: title, number of attachments to display, type of attachment to display by mime/type, order by value, order direction and what should be displayed (attachment title, caption or description).  A <a href='http://plugins.twinpictures.de/plugins/list-related-attachments/documentation/'>complete listing of shortcode options and attribute demos</a> are available that delight and inform. What's more, there is <a href='http://wordpress.org/support/plugin/list-related-attachments-widget'>excellent and free community support</a> is available.
 
 == Installation ==
 
@@ -54,6 +54,12 @@ Why not try: <a href='http://jokesandfun.de/'>Jokes & Fun</a>
 1. Hide your kids, hide your husband, this is how the shortcode works.
 == Changelog ==
 
+= 2.0 =
+* Rebuilt plugin
+* Added options page
+* added link_to option to link to file or attachment page
+* added language translation
+
 = 1.9 =
 * Only the attachments of the first post will be displayed when the sidebar widget is used on the blog page.
 
@@ -92,6 +98,12 @@ Why not try: <a href='http://jokesandfun.de/'>Jokes & Fun</a>
 * The plugin came to be.
 
 == Upgrade Notice ==
+
+= 2.0 =
+* Rebuilt plugin
+* Added options page
+* added link_to option to link to file or attachment page
+* added language translation
 
 = 1.9 =
 * When sidebar widget is used on the Blog page, only attachments of the first post will be displayed.

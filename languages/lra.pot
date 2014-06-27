@@ -1,0 +1,216 @@
+# Copyright (C) 2014 List Related Attachments
+# This file is distributed under the same license as the List Related Attachments package.
+msgid ""
+msgstr ""
+"Project-Id-Version: List Related Attachments 2.0a\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/lra\n"
+"POT-Creation-Date: 2014-06-27 10:53:58+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: lra.php:161
+msgid "Settings"
+msgstr ""
+
+#: lra.php:170
+msgid "really tied the room together"
+msgstr ""
+
+#: lra.php:171
+msgid "made you feel all warm and fuzzy on the inside"
+msgstr ""
+
+#: lra.php:172
+msgid "restored your faith in humanity... even if only for a fleeting second"
+msgstr ""
+
+#: lra.php:173
+msgid "rocked your world"
+msgstr ""
+
+#: lra.php:174
+msgid "inspired you to commit a random act of kindness"
+msgstr ""
+
+#: lra.php:175
+msgid "encouraged more regular flossing of the teeth"
+msgstr ""
+
+#: lra.php:176
+msgid "helped organize your life in the small ways that matter"
+msgstr ""
+
+#: lra.php:177
+msgid "saved your minutes--if not tens of minutes--writing your own solution"
+msgstr ""
+
+#: lra.php:178
+msgid "brightened your day... or darkened if if you are trying to sleep in"
+msgstr ""
+
+#: lra.php:179
+msgid "caused you to dance a little jig of joy and joyousness"
+msgstr ""
+
+#: lra.php:180
+msgid "inspired you to tweet a little @twinpictues social love"
+msgstr ""
+
+#: lra.php:181
+msgid "tasted great, while also being less filling"
+msgstr ""
+
+#: lra.php:182
+msgid "caused you to shout: \"everybody spread love, give me some mo!\""
+msgstr ""
+
+#: lra.php:183
+msgid "helped you keep the funk alive"
+msgstr ""
+
+#: lra.php:184
+msgid "<a href=\"http://www.youtube.com/watch?v=dvQ28F5fOdU\" target=\"_blank\">soften hands while you do dishes</a>"
+msgstr ""
+
+#: lra.php:185
+msgid "helped that little old lady <a href=\"http://www.youtube.com/watch?v=Ug75diEyiA0\" target=\"_blank\">find the beef</a>"
+msgstr ""
+
+#: lra.php:197 lra.php:236
+msgid "Click to toggle"
+msgstr ""
+
+#: lra.php:198
+msgid "List Related Attachments Settings"
+msgstr ""
+
+#: lra.php:210
+msgid "Custom Style"
+msgstr ""
+
+#: lra.php:212
+msgid "Custom CSS style for <em>ultimate flexibility</em>"
+msgstr ""
+
+#: lra.php:217
+msgid "Level Up!"
+msgstr ""
+
+#: lra.php:218
+msgid "%sLRA-Pro%s is our advanced plugin that adds the ability to filter and group attachments by keyword."
+msgstr ""
+
+#: lra.php:226
+msgid "Save Changes"
+msgstr ""
+
+#: lra.php:237
+msgid "About"
+msgstr ""
+
+#: lra.php:239
+msgid "Version"
+msgstr ""
+
+#: lra.php:240
+msgid "List Related Attachments is a sidebar widget and shortcode that will display a filtered, sorted and ordered list of all related attachments linked to current post or page. The widget options are: title, number of attachments to display, type of attachment to display by mime/type, order by value, order direction and what should be displayed (attachment title, caption or description).  A %scomplete listing of shortcode options and attribute demos%s are available that delight and inform. What's more, %sexcellent and free community support%s is available. Oh, one more thing: The plugin can be translated into any language using our %scommunity translation tool%s."
+msgstr ""
+
+#: lra.php:243
+msgid "%sDetailed documentation%s, complete with working demonstrations of all shortcode attributes, is available for your instructional enjoyment."
+msgstr ""
+
+#: lra.php:245
+msgid "If this plugin %s, please consider %ssharing your story%s with others."
+msgstr ""
+
+#: lra.php:246
+msgid "Your %sreviews%s, %sbug-reports, feedback%s and %scocktail recipes%s are always welcomed."
+msgstr ""
+
+#: lra.php:289
+msgid "Display a filtered list of all related attachments linked to the current post or page"
+msgstr ""
+
+#: lra.php:290
+msgid "List Related Attachments"
+msgstr ""
+
+#: lra.php:369
+msgid "Title"
+msgstr ""
+
+#: lra.php:370
+msgid "Number of attachments to display:"
+msgstr ""
+
+#: lra.php:371
+msgid "Attachment Mime/Type"
+msgstr ""
+
+#: lra.php:372
+msgid "list of common mime/types"
+msgstr ""
+
+#: lra.php:373
+msgid "Order By"
+msgstr ""
+
+#: lra.php:374
+msgid "list of orderby values"
+msgstr ""
+
+#: lra.php:375
+msgid "Order Direction"
+msgstr ""
+
+#: lra.php:376
+msgid "Valid values: ASC or DESC"
+msgstr ""
+
+#: lra.php:377
+msgid "Display:"
+msgstr ""
+
+#: lra.php:378
+msgid "title, caption and/or descripton"
+msgstr ""
+
+#: lra.php:379
+msgid "Target"
+msgstr ""
+
+#: lra.php:391
+msgid "Link To"
+msgstr ""
+
+#: lra.php:394
+msgid "file"
+msgstr ""
+
+#: lra.php:395
+msgid "attachment_page"
+msgstr ""
+#. Plugin Name of the plugin/theme
+msgid "List Related Attachments"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://plugins.twinpictures.de/plugins/list-related-attachments/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Display a filtered list of all related attachments linked to the current post or page"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "twinpictures, baden03"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://twinpictures.de/"
+msgstr ""
