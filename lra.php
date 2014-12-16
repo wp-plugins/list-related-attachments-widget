@@ -5,7 +5,7 @@ Text Domain: lra
 Domain Path: /languages
 Plugin URI: http://plugins.twinpictures.de/plugins/list-related-attachments/
 Description: Display a filtered list of all related attachments linked to the current post or page
-Version: 2.0
+Version: 2.0.1
 Author: twinpictures, baden03
 Author URI: http://twinpictures.de/
 License: GPL2
@@ -24,7 +24,7 @@ class WP_Plugin_LRA {
 	 * @var string
 	 */
 	var $plugin_name = 'List Related Attachments';
-	var $version = '2.0';
+	var $version = '2.0.1';
 	var $domain = 'lra';
 
 	/**
@@ -104,55 +104,56 @@ class WP_Plugin_LRA {
 	 */
 	function shortcode($atts, $content = null){
 		global $wp_query;
-                
-		extract(shortcode_atts(array(
-			    'type' => 'application',
-			    'count' => -1,
-			    'orderby' => 'date',
-			    'order' => 'DESC',
-			    'show' => 'title',
-			    'target' => 'self',
-			    'link_to' => 'file'
-			), $atts));
-		    
-		$args = array(
-			'post_type' => 'attachment',
-			'post_mime_type' => $type,
-			'numberposts' => $count,
-			'orderby' => $orderby,
-			'order' => $order,
-			'post_parent' => $wp_query->post->ID
-		);
-		    
-		$attachments = get_children($args);
-		if ($attachments) {
-		    $lra = '<ul class = "list-related-attach '.$show.'">';
-		    $link_target = '';
-		    if($target != 'self'){
-			    $link_target = 'target="_blank"';
-		    }
-		    foreach ($attachments as $attachment) {
-			    //let's add swill's sexy mime type class, shall we?
-			    $mime_parts = explode("/", $attachment->post_mime_type);
-			    $mime_class = 'class="mime-'.$mime_parts[count($mime_parts)-1].'"';
-			    $descr = 'post_title';
-			    //replace title
-			    $display_str = str_replace('title', $attachment->post_title, $show);
-			    //replace caption
-			    $display_str = str_replace('caption', $attachment->post_excerpt, $display_str);
-			    //replace description
-			    $display_str = str_replace('description', $attachment->post_content, $display_str);
-			    if($link_to == 'file'){
-				$lra .= '<li '.$mime_class.'><a href="'.wp_get_attachment_url($attachment->ID).'" '.$link_target.'>'.$display_str.'</a></li>'; 
+                if(!empty($wp_query->post->ID)):
+			extract(shortcode_atts(array(
+				    'type' => 'application',
+				    'count' => -1,
+				    'orderby' => 'date',
+				    'order' => 'DESC',
+				    'show' => 'title',
+				    'target' => 'self',
+				    'link_to' => 'file'
+				), $atts));
+			    
+			$args = array(
+				'post_type' => 'attachment',
+				'post_mime_type' => $type,
+				'numberposts' => $count,
+				'orderby' => $orderby,
+				'order' => $order,
+				'post_parent' => $wp_query->post->ID
+			);
+			    
+			$attachments = get_children($args);
+			if ($attachments) {
+			    $lra = '<ul class = "list-related-attach '.$show.'">';
+			    $link_target = '';
+			    if($target != 'self'){
+				    $link_target = 'target="_blank"';
 			    }
-			    else{
-				$lra .= '<li '.$mime_class.'><a href="'.get_attachment_link($attachment->ID).'" '.$link_target.'>'.$display_str.'</a></li>'; 
+			    foreach ($attachments as $attachment) {
+				    //let's add swill's sexy mime type class, shall we?
+				    $mime_parts = explode("/", $attachment->post_mime_type);
+				    $mime_class = 'class="mime-'.$mime_parts[count($mime_parts)-1].'"';
+				    $descr = 'post_title';
+				    //replace title
+				    $display_str = str_replace('title', $attachment->post_title, $show);
+				    //replace caption
+				    $display_str = str_replace('caption', $attachment->post_excerpt, $display_str);
+				    //replace description
+				    $display_str = str_replace('description', $attachment->post_content, $display_str);
+				    if($link_to == 'file'){
+					$lra .= '<li '.$mime_class.'><a href="'.wp_get_attachment_url($attachment->ID).'" '.$link_target.'>'.$display_str.'</a></li>'; 
+				    }
+				    else{
+					$lra .= '<li '.$mime_class.'><a href="'.get_attachment_link($attachment->ID).'" '.$link_target.'>'.$display_str.'</a></li>'; 
+				    }
 			    }
-		    }
-		    wp_reset_postdata();
-		    $lra .= '</ul>';
-		}
-		return $lra;
+			    wp_reset_postdata();
+			    $lra .= '</ul>';
+			}
+			return $lra;
+		endif;
 	}
 	
 	// Add link to options page from plugin list
@@ -295,55 +296,56 @@ class LRA_Widget extends WP_Widget {
 	
 	global $wp_query;
 	extract($args);
-	
-	$title = empty($instance['title']) ? '' : apply_filters('widget_title', $instance['title']);
-	$count = empty($instance['count']) ? -1 : $instance['count'];
-	$type = empty($instance['type']) ? 'application' : apply_filters('widget_type', $instance['type']);
-	$orderby = empty($instance['orderby']) ? 'date' : apply_filters('widget_orderby', $instance['orderby']);
-	$order = empty($instance['order']) ? 'DESC' : apply_filters('widget_order', $instance['order']);
-	$display = empty($instance['display']) ? 'title' : apply_filters('widget_display', $instance['display']);
-	$target = empty($instance['target']) ? 'self' : apply_filters('widget_target', $instance['target']);
-	$link_to = empty($instance['link_to']) ? 'file' : apply_filters('widget_target', $instance['link_to']);
-	
-	$args = array(
-		'post_type' => 'attachment',
-		'post_mime_type' => $type,
-		'numberposts' => $count,
-		'orderby' => $orderby,
-		'order' => $order,
-		'post_parent' => $wp_query->post->ID
-	);
+	if(!empty($wp_query->post->ID)):
+		$title = empty($instance['title']) ? '' : apply_filters('widget_title', $instance['title']);
+		$count = empty($instance['count']) ? -1 : $instance['count'];
+		$type = empty($instance['type']) ? 'application' : apply_filters('widget_type', $instance['type']);
+		$orderby = empty($instance['orderby']) ? 'date' : apply_filters('widget_orderby', $instance['orderby']);
+		$order = empty($instance['order']) ? 'DESC' : apply_filters('widget_order', $instance['order']);
+		$display = empty($instance['display']) ? 'title' : apply_filters('widget_display', $instance['display']);
+		$target = empty($instance['target']) ? 'self' : apply_filters('widget_target', $instance['target']);
+		$link_to = empty($instance['link_to']) ? 'file' : apply_filters('widget_target', $instance['link_to']);
 		
-	$attachments = get_children($args);
-	if ($attachments) {
-		echo $before_widget;
-		if($title){
-			echo $before_title . $title . $after_title;
-		}
-		echo '<ul>';
-		$link_target = '';
-		if($target != 'self'){
-			$link_target = 'target="_blank"';
-		}
-		foreach ($attachments as $attachment) {
-			$mime_parts = explode("/", $attachment-> post_mime_type);
-			$mime_class = 'class="mime-'.$mime_parts[count($mime_parts)-1].'"';
-			//replace title
-			$display_str = str_replace('title', $attachment->post_title, $display);
-			//replace caption
-			$display_str = str_replace('caption', $attachment->post_excerpt, $display_str);
-			//replace description
-			$display_str = str_replace('description', $attachment->post_content, $display_str);
-			if($link_to == 'file'){
-				echo '<li '.$mime_class.'><a href="'.wp_get_attachment_url($attachment->ID).'" '.$link_target.'>'.$display_str.'</a></li>';     
-			}
-			else{
-				echo '<li '.$mime_class.'><a href="'.get_attachment_link($attachment->ID).'" '.$link_target.'>'.$display_str.'</a></li>';     
-			}
+		$args = array(
+			'post_type' => 'attachment',
+			'post_mime_type' => $type,
+			'numberposts' => $count,
+			'orderby' => $orderby,
+			'order' => $order,
+			'post_parent' => $wp_query->post->ID
+		);
 			
+		$attachments = get_children($args);
+		if ($attachments) {
+			echo $before_widget;
+			if($title){
+				echo $before_title . $title . $after_title;
+			}
+			echo '<ul>';
+			$link_target = '';
+			if($target != 'self'){
+				$link_target = 'target="_blank"';
+			}
+			foreach ($attachments as $attachment) {
+				$mime_parts = explode("/", $attachment-> post_mime_type);
+				$mime_class = 'class="mime-'.$mime_parts[count($mime_parts)-1].'"';
+				//replace title
+				$display_str = str_replace('title', $attachment->post_title, $display);
+				//replace caption
+				$display_str = str_replace('caption', $attachment->post_excerpt, $display_str);
+				//replace description
+				$display_str = str_replace('description', $attachment->post_content, $display_str);
+				if($link_to == 'file'){
+					echo '<li '.$mime_class.'><a href="'.wp_get_attachment_url($attachment->ID).'" '.$link_target.'>'.$display_str.'</a></li>';     
+				}
+				else{
+					echo '<li '.$mime_class.'><a href="'.get_attachment_link($attachment->ID).'" '.$link_target.'>'.$display_str.'</a></li>';     
+				}
+				
+			}
+			echo '</ul>'.$after_widget;
 		}
-		echo '</ul>'.$after_widget;
-	}
+	endif;
     }
 
     /** Update **/
