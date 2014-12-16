@@ -2,18 +2,16 @@
 Contributors: twinpictures, baden03
 Donate link: http://plugins.twinpictures.de/plugins/list-related-attachments/
 Tags: widget, list, related, attachments, sidebar, uploaded, files, shortcode, twinpictures, plugin-oven, plugin oven
-Requires at least: 2.8
-Tested up to: 3.5
-Stable tag: 1.9
+Requires at least: 3.9
+Tested up to: 4.1
+Stable tag: 2.0.1
 
 Listed Related Attachments will display a filtered list of all related attachments for the current post or page.
 
 == Description ==
-
-List Related Attachments is a sidebar widget and shortcode that will display a filtered, sorted and ordered list of all related attachments linked to current post or page. The widget options are: title, number of attachments to display, type of attachment to display by mime/type, order by value, order direction and what should be displayed (attachment title, caption or description).  A <a href='http://plugins.twinpictures.de/plugins/list-related-attachments/documentation/'>complete listing of shortcode options and attribute demos</a> are available that delight and inform. What's more, there is <a href='http://wordpress.org/support/plugin/list-related-attachments-widget'>excellent and free community</a> as well as <a href='http://plugins.twinpictures.de/plugins/list-related-attachments/support/'>premium support</a> available.
+List Related Attachments is a sidebar widget and shortcode that will display a filtered, sorted and ordered list of all related attachments linked to current post or page. The widget options are: title, number of attachments to display, type of attachment to display by mime/type, order by value, order direction and what should be displayed (attachment title, caption or description).  A <a href='http://plugins.twinpictures.de/plugins/list-related-attachments/documentation/'>complete listing of shortcode options and attribute demos</a> are available that delight and inform. What's more, there is <a href='http://wordpress.org/support/plugin/list-related-attachments-widget'>excellent and free community support</a> and a super-duper online <a href=“http://translate.twinpictures.de/projects/list-related-attachments”>language translation tool</a> to roll-your-own language files.
 
 == Installation ==
-
 1. Old-school: upload the `List Related Attachments` folder to the `/wp-content/plugins/` directory via FTP.  Hipster: Add the plugin via the WordPress Plugins menu.
 1. Activate the Plugin
 1. Add the Widget to the desired sidebar in the WordPress Widgets menu.
@@ -21,16 +19,16 @@ List Related Attachments is a sidebar widget and shortcode that will display a f
 1. Add a the shortcode to your post like so: `[list-related-attach type="application/zip" count="3" orderby="title" order="ASC" show="caption"]`
 1. Test that the this plugin meets your demanding needs.
 1. Rate the plugin and verify that it works at wordpress.org.
-1. Leave a comment regarding bugs, feature request, cocktail recipes at: http://wordpress.org/tags/list-related-attachments-widget
+1. Leave a comment regarding bugs, feature request, cocktail recipes at: http://wordpress.org/support/plugin/list-related-attachments-widget
 
 == Frequently Asked Questions ==
-
 = What are the default shortcode attributes? =
 1. type = "application" (so basically everything)
 1. count = "-1" (so everything)
 1. orderby = "date" (by the date the attachment was added)
 1. order = "DESC" (Descending in the newest to oldest direction)
 1. show = "title" (The title of the attachment)
+1. link_so = “file” (as opposed to the attachment page)
 
 = I am going to a respectable cocktail bar, can you recommend a drink? =
 Gin Basel Smash
@@ -47,12 +45,24 @@ Why not try: <a href='http://jokesandfun.de/'>Jokes & Fun</a>
 = What is the meaning of life, the universe and everything? =
 42
 
-== Screenshots ==
+= Who likes to rock the party? =
+We like to rock the party.
 
+== Screenshots ==
 1. Shown here are the available options of the `List Related Attachments`.  See any more you like?  Let us know!
 1. For your viewing pleasure:  The sidebar widget in the midst of some hot-hot sidebar widget action.  Calm down now... it's not THAT exciting.
 1. Hide your kids, hide your husband, this is how the shortcode works.
+
 == Changelog ==
+= 2.0.1 =
+* cleaned up the readme file
+* first check to make sure there is a pageID before trying to grab it’s attachments
+
+= 2.0 =
+* Rebuilt plugin
+* Added options page
+* added link_to option to link to file or attachment page
+* added language translation
 
 = 1.9 =
 * Only the attachments of the first post will be displayed when the sidebar widget is used on the blog page.
@@ -92,6 +102,15 @@ Why not try: <a href='http://jokesandfun.de/'>Jokes & Fun</a>
 * The plugin came to be.
 
 == Upgrade Notice ==
+= 2.0.1 =
+* cleaned up the readme file
+* first checks for pageID before trying to grab it’s attachments
+
+= 2.0 =
+* Rebuilt plugin
+* Added options page
+* added link_to option to link to file or attachment page
+* added language translation
 
 = 1.9 =
 * When sidebar widget is used on the Blog page, only attachments of the first post will be displayed.
