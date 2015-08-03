@@ -5,7 +5,7 @@ Text Domain: lra
 Domain Path: /languages
 Plugin URI: http://plugins.twinpictures.de/plugins/list-related-attachments/
 Description: Display a filtered list of all related attachments linked to the current post or page
-Version: 2.0.1
+Version: 2.1.0
 Author: twinpictures, baden03
 Author URI: http://twinpictures.de/
 License: GPL2
@@ -24,7 +24,7 @@ class WP_Plugin_LRA {
 	 * @var string
 	 */
 	var $plugin_name = 'List Related Attachments';
-	var $version = '2.0.1';
+	var $version = '2.1.0';
 	var $domain = 'lra';
 
 	/**
@@ -34,7 +34,7 @@ class WP_Plugin_LRA {
 	var $plguin_options_page_title = 'List Related Attachments Options';
 	var $plugin_options_menue_title = 'List Related Attach';
 	var $plugin_options_slug = 'lra-optons';
-	
+
 	/**
 	 * Name of the options
 	 * @var string
@@ -54,21 +54,21 @@ class WP_Plugin_LRA {
 	function __construct() {
 		// set option values
 		$this->_set_options();
-		
+
 		// load text domain for translations
 		load_plugin_textdomain( $this->domain, FALSE, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-		
+
 		// add actions
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		add_action( 'plugin_action_links_' . plugin_basename(__FILE__), array( $this, 'plugin_actions' ) );
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action('wp_head', array( $this, 'plugin_head_inject' ) );
-		
+
 		// add shortcode
 		add_shortcode('list-related-attach', array($this, 'shortcode'));
-		
-		// Add shortcode support for widgets  
-		add_filter('widget_text', 'do_shortcode'); 
+
+		// Add shortcode support for widgets
+		add_filter('widget_text', 'do_shortcode');
 	}
 
 	//plugin header inject
@@ -98,7 +98,7 @@ class WP_Plugin_LRA {
 		// register settings
 		register_setting( $this->domain, $this->options_name );
 	}
-	
+
 	/**
 	 * Callback shortcode
 	 */
@@ -114,7 +114,7 @@ class WP_Plugin_LRA {
 				    'target' => 'self',
 				    'link_to' => 'file'
 				), $atts));
-			    
+
 			$args = array(
 				'post_type' => 'attachment',
 				'post_mime_type' => $type,
@@ -123,7 +123,7 @@ class WP_Plugin_LRA {
 				'order' => $order,
 				'post_parent' => $wp_query->post->ID
 			);
-			    
+
 			$attachments = get_children($args);
 			if ($attachments) {
 			    $lra = '<ul class = "list-related-attach '.$show.'">';
@@ -143,10 +143,10 @@ class WP_Plugin_LRA {
 				    //replace description
 				    $display_str = str_replace('description', $attachment->post_content, $display_str);
 				    if($link_to == 'file'){
-					$lra .= '<li '.$mime_class.'><a href="'.wp_get_attachment_url($attachment->ID).'" '.$link_target.'>'.$display_str.'</a></li>'; 
+					$lra .= '<li '.$mime_class.'><a href="'.wp_get_attachment_url($attachment->ID).'" '.$link_target.'>'.$display_str.'</a></li>';
 				    }
 				    else{
-					$lra .= '<li '.$mime_class.'><a href="'.get_attachment_link($attachment->ID).'" '.$link_target.'>'.$display_str.'</a></li>'; 
+					$lra .= '<li '.$mime_class.'><a href="'.get_attachment_link($attachment->ID).'" '.$link_target.'>'.$display_str.'</a></li>';
 				    }
 			    }
 			    wp_reset_postdata();
@@ -155,7 +155,7 @@ class WP_Plugin_LRA {
 			return $lra;
 		endif;
 	}
-	
+
 	// Add link to options page from plugin list
 	function plugin_actions($links) {
 		$new_links = array();
@@ -191,7 +191,7 @@ class WP_Plugin_LRA {
 		<div class="wrap">
 			<h2><?php echo $this->plugin_name; ?></h2>
 		</div>
-		
+
 		<div class="postbox-container metabox-holder meta-box-sortables" style="width: 69%">
 			<div style="margin:0 5px;">
 				<div class="postbox">
@@ -204,7 +204,7 @@ class WP_Plugin_LRA {
 								$this->_set_options();
 								$options = $this->options;
 							?>
-							
+
 							<fieldset class="options">
 								<table class="form-table">
 								<tr>
@@ -213,16 +213,16 @@ class WP_Plugin_LRA {
 										<br /><span class="description"><?php _e( 'Custom CSS style for <em>ultimate flexibility</em>', $this->domain ) ?></span></label>
 									</td>
 								</tr>
-								
+
 								<tr>
 									<th><strong><?php _e( 'Level Up!', $this->domain ) ?></strong></th>
 									<td><?php printf(__( '%sLRA-Pro%s is our advanced plugin that adds the ability to filter and group attachments by keyword.', $this->domain ), '<a href="http://plugins.twinpictures.de/premium-plugins/lra-pro/">', '</a>'); ?>
 									</td>
 								</tr>
-								
+
 								</table>
 							</fieldset>
-							
+
 							<p class="submit" style="margin-bottom: 20px;">
 								<input class="button-primary" type="submit" value="<?php _e( 'Save Changes', $this->domain ) ?>" style="float: right;" />
 							</p>
@@ -230,7 +230,7 @@ class WP_Plugin_LRA {
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="postbox-container side metabox-holder meta-box-sortables" style="width:29%;">
 			<div style="margin:0 5px;">
 				<div class="postbox">
@@ -265,7 +265,7 @@ class WP_Plugin_LRA {
 		if ( empty( $saved_options ) ) {
 			$saved_options = get_option( $this->domain . 'options' );
 		}
-		
+
 		// set all options
 		if ( ! empty( $saved_options ) ) {
 			foreach ( $this->options AS $key => $option ) {
@@ -285,15 +285,21 @@ $WP_Plugin_LRA = new WP_Plugin_LRA;
 //Widget
 class LRA_Widget extends WP_Widget {
     /** constructor */
-    function LRA_Widget() {
-		load_plugin_textdomain( 'lra', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-		$widget_ops = array('classname' => 'LRA_Widget', 'description' => __('Display a filtered list of all related attachments linked to the current post or page', 'lra') );
-		$this->WP_Widget('LRA_Widget', __('List Related Attachments','lra'), $widget_ops);
+	public function __construct(){
+		parent::__construct(
+    		'LRA_Widget',
+        	__( 'List Related Attachments', 'lra' ),
+        	array(
+            	'classname'   => 'LRA_Widget',
+            	'description' => __( 'Display a filtered list of all related attachments linked to the current post or page', 'lra' )
+        	)
+	    );
+	    load_plugin_textdomain( 'lra', false, basename( dirname( __FILE__ ) ) . '/languages' );
     }
-	
+
     /** Widget */
     function widget($args, $instance) {
-	
+
 	global $wp_query;
 	extract($args);
 	if(!empty($wp_query->post->ID)):
@@ -305,7 +311,7 @@ class LRA_Widget extends WP_Widget {
 		$display = empty($instance['display']) ? 'title' : apply_filters('widget_display', $instance['display']);
 		$target = empty($instance['target']) ? 'self' : apply_filters('widget_target', $instance['target']);
 		$link_to = empty($instance['link_to']) ? 'file' : apply_filters('widget_target', $instance['link_to']);
-		
+
 		$args = array(
 			'post_type' => 'attachment',
 			'post_mime_type' => $type,
@@ -314,7 +320,7 @@ class LRA_Widget extends WP_Widget {
 			'order' => $order,
 			'post_parent' => $wp_query->post->ID
 		);
-			
+
 		$attachments = get_children($args);
 		if ($attachments) {
 			echo $before_widget;
@@ -336,12 +342,12 @@ class LRA_Widget extends WP_Widget {
 				//replace description
 				$display_str = str_replace('description', $attachment->post_content, $display_str);
 				if($link_to == 'file'){
-					echo '<li '.$mime_class.'><a href="'.wp_get_attachment_url($attachment->ID).'" '.$link_target.'>'.$display_str.'</a></li>';     
+					echo '<li '.$mime_class.'><a href="'.wp_get_attachment_url($attachment->ID).'" '.$link_target.'>'.$display_str.'</a></li>';
 				}
 				else{
-					echo '<li '.$mime_class.'><a href="'.get_attachment_link($attachment->ID).'" '.$link_target.'>'.$display_str.'</a></li>';     
+					echo '<li '.$mime_class.'><a href="'.get_attachment_link($attachment->ID).'" '.$link_target.'>'.$display_str.'</a></li>';
 				}
-				
+
 			}
 			echo '</ul>'.$after_widget;
 		}
@@ -357,7 +363,7 @@ class LRA_Widget extends WP_Widget {
 
     /** Form **/
     function form($instance) {
-	
+
 	$title = empty($instance['title']) ? '' : stripslashes($instance['title']);
 	$count = empty($instance['count']) ? '' : $instance['count'];
 	$type = empty($instance['type']) ? 'application' : stripslashes($instance['type']);
@@ -367,7 +373,7 @@ class LRA_Widget extends WP_Widget {
 	$target = empty($instance['target']) ? 'self' : stripslashes($instance['target']);
 	$link_to = empty($instance['link_to']) ? 'file' : stripslashes($instance['link_to']);
 	?>
-	
+
 	<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title', 'lra'); ?>: <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></label></p>
 	<p><label for="<?php echo $this->get_field_id('count'); ?>"><?php _e('Number of attachments to display:', 'lra'); ?></label> <input class="widefat" style="width: 50px;" id="<?php echo $this->get_field_id('count'); ?>" name="<?php echo $this->get_field_name('count'); ?>" type="number" value="<?php echo esc_attr($count); ?>" /></p>
 	<p><label for="<?php echo $this->get_field_id('type'); ?>"><?php _e('Attachment Mime/Type', 'lra'); ?>: <input class="widefat" id="<?php echo $this->get_field_id('type'); ?>" name="<?php echo $this->get_field_name('type'); ?>" type="text" value="<?php echo $type; ?>" /></label>
@@ -379,7 +385,7 @@ class LRA_Widget extends WP_Widget {
 	<p><label for="<?php echo $this->get_field_id('display'); ?>"><?php _e('Display:'); ?> <input class="widefat" id="<?php echo $this->get_field_id('display'); ?>" name="<?php echo $this->get_field_name('display'); ?>" type="text" value="<?php echo $display; ?>" /></label>
 	<span class="description"><?php _e('title, caption and/or descripton', 'lra'); ?></span></p>
 	<p><?php _e('Target', 'lra'); ?>: <select name="<?php echo $this->get_field_name('target'); ?>" id="<?php echo $this->get_field_name('target'); ?>">
-	<?php	
+	<?php
 	    $option_arr = array('self', 'blank');
 		foreach($option_arr AS $opt){
 			$selected = '';
@@ -411,6 +417,8 @@ class LRA_Widget extends WP_Widget {
 } // class LRA_Widget
 
 // register LRA_Widget widget
-add_action('widgets_init', create_function('', 'return register_widget("LRA_Widget");'));
+add_action( 'widgets_init', function(){
+     register_widget( 'LRA_Widget' );
+});
 
 ?>
