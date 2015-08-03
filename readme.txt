@@ -3,8 +3,8 @@ Contributors: twinpictures, baden03
 Donate link: http://plugins.twinpictures.de/plugins/list-related-attachments/
 Tags: widget, list, related, attachments, sidebar, uploaded, files, shortcode, twinpictures, plugin-oven, plugin oven
 Requires at least: 3.9
-Tested up to: 4.1
-Stable tag: 2.0.1
+Tested up to: 4.3
+Stable tag: 2.1.0
 
 Listed Related Attachments will display a filtered list of all related attachments for the current post or page.
 
@@ -54,6 +54,10 @@ We like to rock the party.
 1. Hide your kids, hide your husband, this is how the shortcode works.
 
 == Changelog ==
+
+= 2.1.0 =
+* using new php5 constructor for widget
+
 = 2.0.1 =
 * cleaned up the readme file
 * first check to make sure there is a pageID before trying to grab it’s attachments
@@ -102,42 +106,5 @@ We like to rock the party.
 * The plugin came to be.
 
 == Upgrade Notice ==
-= 2.0.1 =
-* cleaned up the readme file
-* first checks for pageID before trying to grab it’s attachments
-
-= 2.0 =
-* Rebuilt plugin
-* Added options page
-* added link_to option to link to file or attachment page
-* added language translation
-
-= 1.9 =
-* When sidebar widget is used on the Blog page, only attachments of the first post will be displayed.
-
-= 1.8 =
-* Plugin now supports language translation and multiple instance widgets
-
-= 1.7 =
-* Added target for links, as well as the ability to show more than one attachment attribute in the link.
-
-= 1.6.1 =
-* Improved documentation and a new home at The Plugin Oven.
-
-= 1.6 =
-Added new mime-type specific classes to the list items.
-
-= 1.5 =
-Fixes a bug in the shortcode discovered by motylanogha.  Plugin is now 100% working again.
-
-= 1.4 =
-Expands the plugin to include display options in the attachment link text.
-
-= 1.3 =
-Expands the plugin to include orderby and order options.
-
-= 1.2 =
-Introduces the [list-related-attach] shortcode for listing related attachments within posts & pages
-
-= 1.1 =
-Upgrade today to take advantage of Ultimate Flexibility by manually entering the mime/type of the attachments to list.
+= 2.1.0 =
+* uses new php5 constructor, tested with WordPress version 4.3 RC-1
